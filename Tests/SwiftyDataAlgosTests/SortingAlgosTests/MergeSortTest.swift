@@ -16,7 +16,7 @@ final class MergeSortTests: XCTestCase {
                   "Sorted Array \(sortedArray) does not equal result Array \(result)")
     }
     
-    func testNotSortedUsingMergeSortOnSortedArray() throws {
+    func testNotSortedUsingMergeSortOnUnsortedArray() throws {
         let notSortedArray = [2,1,3]
         let sortedArray = [1,2,3]
         let result = notSortedArray.sorted(using: .MergeSort)
@@ -24,7 +24,7 @@ final class MergeSortTests: XCTestCase {
                   "Sorted Array \(sortedArray) does not equal result Array \(result)")
     }
     
-    func testNotSorted2UsingMergeSortOnSortedArray() throws {
+    func testNotSorted2UsingMergeSortOnUnsortedArray() throws {
         let notSortedArray = [2,1,3,6,9,7,2]
         let sortedArray = [1,2,2,3,6,7,9]
         let result = notSortedArray.sorted(using: .MergeSort)
