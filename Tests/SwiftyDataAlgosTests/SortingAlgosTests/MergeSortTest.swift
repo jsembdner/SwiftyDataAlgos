@@ -9,27 +9,36 @@ import XCTest
 @testable import SwiftyDataAlgos
 
 final class MergeSortTests: XCTestCase {
-    func testSortedUsingMergeSortOnSortedArray() throws {
-        let sortedArray = [1,2,3]
-        let result = sortedArray.sorted(using: .MergeSort)
-        XCTAssert(sortedArray.elementsEqual(result),
-                  "Sorted Array \(sortedArray) does not equal result Array \(result)")
-    }
+    let notSortedNumericalArrays =
+    [
+        [],
+        [1],
+        [5,1],
+        [1,2,3],
+        [2,1,3],
+        [7,7,7],
+        [2,1,3,6,9,7,2,8],
+        [-2,-5]
+    ]
     
-    func testNotSortedUsingMergeSortOnUnsortedArray() throws {
-        let notSortedArray = [2,1,3]
-        let sortedArray = [1,2,3]
-        let result = notSortedArray.sorted(using: .MergeSort)
-        XCTAssert(sortedArray.elementsEqual(result),
-                  "Sorted Array \(sortedArray) does not equal result Array \(result)")
-    }
+    let sortedNumericalArrays =
+    [
+        [],
+        [1],
+        [1,5],
+        [1,2,3],
+        [1,2,3],
+        [7,7,7],
+        [1,2,2,3,6,7,8,9],
+        [-5,-2]
+    ]
     
-    func testNotSorted2UsingMergeSortOnUnsortedArray() throws {
-        let notSortedArray = [2,1,3,6,9,7,2]
-        let sortedArray = [1,2,2,3,6,7,9]
-        let result = notSortedArray.sorted(using: .MergeSort)
-        XCTAssert(sortedArray.elementsEqual(result),
-                  "Sorted Array \(sortedArray) does not equal result Array \(result)")
+    func testSortedOnNumericalArrays() throws {
+        for i in 0..<sortedNumericalArrays.count {
+            let result = notSortedNumericalArrays[i].sorted(using: .MergeSort)
+            XCTAssert(sortedNumericalArrays[i].elementsEqual(result),
+                      "Sorted Array \(sortedNumericalArrays[i]) does not equal result Array \(result)")
+        }
     }
 }
 
