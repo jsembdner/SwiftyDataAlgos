@@ -25,21 +25,29 @@ internal class MergeSort<Element: Comparable> {
     
     private func merge(mergeLeft: Array<Element>, mergeRight: Array<Element>) -> Array<Element> {
         var merged: Array<Element> = []
-        var mergeLeft = mergeLeft
-        var mergeRight = mergeRight
-        while (!mergeLeft.isEmpty || !mergeRight.isEmpty) {
-            if mergeLeft.isEmpty {
-                merged.append(mergeRight[0])
-                mergeRight.removeFirst()
-            } else if mergeRight.isEmpty {
-                merged.append(mergeLeft[0])
-                mergeLeft.removeFirst()
-            } else if mergeLeft[0] < mergeRight[0] {
-                merged.append(mergeLeft[0])
-                mergeLeft.removeFirst()
+        let mergedCount = mergeLeft.count + mergeRight.count
+        merged.reserveCapacity(mergedCount)
+        var mergeLeftIndex = 0
+        var mergeRightIndex = 0
+        
+        // while there is still something to merge
+        while (mergeLeftIndex + mergeRightIndex < mergedCount) {
+            // right is empty, add rest of left
+            if mergeRightIndex >= mergeRight.count {
+                merged.append(mergeLeft[mergeLeftIndex])
+                mergeLeftIndex += 1
+            // left is empty, add rest of right
+            } else if mergeLeftIndex >= mergeLeft.count {
+                merged.append(mergeRight[mergeRightIndex])
+                mergeRightIndex += 1
+            // if left is smaller, add left
+            } else if mergeLeft[mergeLeftIndex] < mergeRight[mergeRightIndex] {
+                merged.append(mergeLeft[mergeLeftIndex])
+                mergeLeftIndex += 1
+            // else right is smaller or equal, add right
             } else {
-                merged.append(mergeRight[0])
-                mergeRight.removeFirst()
+                merged.append(mergeRight[mergeRightIndex])
+                mergeRightIndex += 1
             }
         }
         return merged
