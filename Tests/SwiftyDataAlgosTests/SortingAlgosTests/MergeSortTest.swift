@@ -73,21 +73,28 @@ final class MergeSortTests: XCTestCase {
     
     func testSortedOnLargeNumericalKiloArray() throws {
         let arrayPair = createSortedUnsortedArrayPair(numElements: 2 << 9)
-        let result = arrayPair.unsorted.sorted(using: .MergeSort)
+        var result: [Int] = []
+        self.measure {
+            result = arrayPair.unsorted.sorted(using: .MergeSort)
+        }
+        XCTAssert(arrayPair.sorted.elementsEqual(result),
+                  "Sorted Array \(arrayPair.sorted) does not equal result Array \(result)")
+    }
+    
+    func testSwiftSortedOnLargeNumericalKiloArray() throws {
+        let arrayPair = createSortedUnsortedArrayPair(numElements: 2 << 9)
+        var result: [Int] = []
+        self.measure {
+            result = arrayPair.unsorted.sorted()
+        }
         XCTAssert(arrayPair.sorted.elementsEqual(result),
                   "Sorted Array \(arrayPair.sorted) does not equal result Array \(result)")
     }
     
     func testSortedOnLargeNumericalMegaArray() throws {
         let arrayPair = createSortedUnsortedArrayPair(numElements: 2 << 19)
-        let result = arrayPair.unsorted.sorted(using: .MergeSort)
-        XCTAssert(arrayPair.sorted.elementsEqual(result),
-                  "Sorted Array \(arrayPair.sorted) does not equal result Array \(result)")
-    }
-    
-    func testSwiftSortedOnLargeNumericalMegaArray() throws {
-        let arrayPair = createSortedUnsortedArrayPair(numElements: 2 << 19)
-        let result = arrayPair.unsorted.sorted()
+        var result: [Int] = []
+        result = arrayPair.unsorted.sorted(using: .MergeSort)
         XCTAssert(arrayPair.sorted.elementsEqual(result),
                   "Sorted Array \(arrayPair.sorted) does not equal result Array \(result)")
     }
